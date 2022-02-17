@@ -1,0 +1,36 @@
+before:
+  hooks:
+    - go mod tidy -v
+builds:
+  - id: speedcf
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - arm
+      - arm64
+      - 386
+      - amd64
+      - mips
+      - mipsle
+    gomips:
+      - softfloat
+    ignore:
+      - goos: windows
+        goarch: arm
+      - goos: windows
+        goarch: arm64
+    main: ./
+    binary: speedcf
+archives:
+  - files:
+      - none*
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
